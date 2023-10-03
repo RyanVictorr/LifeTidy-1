@@ -1,6 +1,41 @@
-document.addEventListener('DOMContentLoaded', function () {
-  
+//Importando JWT
+import jwt from 'jsonwebtoken';
 
+//Importando manipulação com cookies
+import Cookies from 'js-cookie';
+
+// JWT
+
+// Manipulando dados
+document.getElementById("loginButton").addEventListener("click", function(){
+  const emailInput = document.getElementById("emailInput").value;
+  const passwordInput = document.getElementById("passwordInput").value;
+  
+  //gerando token
+
+  console.log(emailInput)
+  console.log(passwordInput)
+
+  let userInfo ={
+    //Informações incluidas no token
+    email: emailInput,
+    senha: passwordInput
+  }
+  //Chave secreta
+  const secretKey = 'x^U!]$zs,P7mOarq2Eo4'
+
+  //Geração do token
+  const token = jwt.sign(userInfo, secretKey )
+
+  //Armazenando o token nos cookies
+
+  Cookies.set('token', token, {expires: 1/24 /*Duração 1 h, dividindo 1 dia (24 h) por 24 = 1(1 h)*/})
+  let tokenck = Cookies.get(token)
+  console.log(tokenck)
+})
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
 //Pesquisa
 
